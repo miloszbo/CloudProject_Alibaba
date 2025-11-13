@@ -1,4 +1,5 @@
 import type { Route } from "./+types/home";
+import { useNavigate } from "react-router";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -8,19 +9,40 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Login() {
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    navigate("/home");
+  };
   return (
-<fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-[516px] h-[344px] mx-auto border p-3 text-sm flex flex-col gap-3">
+  <div className="flex w-full h-full justify-center items-center login-form">
+    <div className="w-[516px] mx-auto">
+      {/* Title placed above the framed fieldset */}
+      <h2 className="text-lg font-bold mb-3 text-center">Zarejestruj się</h2>
 
-  <label className="label text-sm">Email</label>
-  <input type="email" className="input input-sm w-full" placeholder="Email" />
+      <fieldset className="flex bg-[#7C7C7C] rounded-box w-full h-[344px] mx-auto border p-4 pt-6 text-sm flex-col gap-4 items-center">
 
-  <label className="label text-sm">Email</label>
-  <input type="email" className="input input-sm w-full" placeholder="Email" />
-  
-  <label className="label text-sm">Password</label>
-  <input type="password" className="input input-sm w-full" placeholder="Password" />
+      <div className="flex flex-col gap-4 w-full items-center ">
+        <div className="flex flex-col gap-2 w-[340px] mt-14">
+          <input type="email" className="input input-sm w-full h-8" placeholder="User" />
+        </div>
 
-  <button className="btn btn-neutral btn-sm mt-2 self-end">Login</button>
-</fieldset>
+        <div className="flex flex-col gap-2 w-[340px]">
+          <input type="email" className="input input-sm w-full h-8" placeholder="Email" />
+        </div>
+        
+        <div className="flex flex-col gap-2 w-[340px]">
+          <input type="password" className="input input-sm w-full h-8" placeholder="Password" />
+        </div>
+      </div>
+      <button 
+        onClick={handleLogin}
+        className="btn btn-neutral flex-center btn-sm mt-2 w-[258px] self-center h-12"
+      >
+        Login
+      </button>
+    </fieldset>
+    </div>
+  </div>
   );
 }
