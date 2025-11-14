@@ -1,0 +1,24 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+*.test
+
+*.out
+
+go.work
+
+tmp/
+
+.vscode
+.idea
+
+.env
+
+main
+*templ.go
+
+.DS_Store
