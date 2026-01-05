@@ -24,10 +24,45 @@ func (uh *UserHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 
 	if err := uh.UserService.CreateUser(r.Context(), &req); err != nil {
 		log.Println(err.Error())
-		http.Error(w, err.Error(), StatusFromError(err))
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
 	w.WriteHeader(http.StatusCreated)
 	w.Write([]byte(`{"message":"user created"}`))
+}
+
+func (u *UserHandler) LoginUser(w http.ResponseWriter, r *http.Request) {
+	ctx := context.Background()
+	loginData := models.LoginUserRequest{}
+
+	if err := json.NewDecoder(r.Body).Decode(&loginData); err != nil {
+		log.Println(err.Error())
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	if err := loginData.Validate(); err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+	}
+
+	token, err := u.UserService.LoginUser(ctx, &loginData)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	cookie := &http.Cookie{
+		Name:     "auth_token",
+		Value:    token,
+		MaxAge:   24 * 3600,
+		HttpOnly: true,
+		Path:     "/",
+		SameSite: http.SameSiteLaxMode,
+		Secure:   false,
+	}
+
+	http.SetCookie(w, cookie)
+
+	w.WriteHeader(http.StatusOK)
 }

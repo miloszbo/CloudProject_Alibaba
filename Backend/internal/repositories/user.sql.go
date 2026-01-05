@@ -29,3 +29,19 @@ func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) error {
 	_, err := q.db.Exec(ctx, createUser, arg.Username, arg.Passwdhash, arg.Email)
 	return err
 }
+
+const loginUserWithUsername = `-- name: LoginUserWithUsername :one
+SELECT username, passwdhash FROM users WHERE username = $1
+`
+
+type LoginUserWithUsernameRow struct {
+	Username   string `json:"username"`
+	Passwdhash string `json:"passwdhash"`
+}
+
+func (q *Queries) LoginUserWithUsername(ctx context.Context, username string) (LoginUserWithUsernameRow, error) {
+	row := q.db.QueryRow(ctx, loginUserWithUsername, username)
+	var i LoginUserWithUsernameRow
+	err := row.Scan(&i.Username, &i.Passwdhash)
+	return i, err
+}

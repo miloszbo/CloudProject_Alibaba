@@ -7,3 +7,5 @@ INSERT INTO users (
     $1, $2, $3
 );
 
+-- name: LoginUserWithUsername :one
+SELECT username, passwdhash FROM users WHERE username = $1; 
