@@ -17,7 +17,7 @@ func (cur *CreateUserRequest) Validate() error {
 
 type LoginUserRequest struct {
 	Login    string `json:"login"`
-	Password string `json:"password"`
+	Password string `json:"passwd"`
 }
 
 func (lur *LoginUserRequest) Validate() error {

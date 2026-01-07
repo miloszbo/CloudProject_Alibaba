@@ -48,6 +48,7 @@ func (u *UserHandler) LoginUser(w http.ResponseWriter, r *http.Request) {
 
 	token, err := u.UserService.LoginUser(ctx, &loginData)
 	if err != nil {
+		log.Println(err.Error())
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}

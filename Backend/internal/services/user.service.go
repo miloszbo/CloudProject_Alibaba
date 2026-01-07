@@ -63,7 +63,7 @@ func (s *BaseUserService) LoginUser(ctx context.Context, loginData *models.Login
 		return "", errors.New("unauthorized")
 	}
 
-	if err := bcrypt.CompareHashAndPassword([]byte(user.Passwdhash), []byte(loginData.Password)); err != nil {
+	if err = bcrypt.CompareHashAndPassword([]byte(user.Passwdhash), []byte(loginData.Password)); err != nil {
 		return "", errors.New("unauthorized")
 	}
 
