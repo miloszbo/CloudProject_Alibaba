@@ -7,9 +7,11 @@ services:
     restart: unless-stopped
     ports:
       - ${APP_PORT}:${APP_PORT}
+    env_file:
+      - .env
     environment:
       APP_ENV: local
-      PORT: ${APP_PORT}
+      APP_PORT: ${APP_PORT}
       DB_HOST: ${DB_HOST}
       DB_PORT: ${DB_PORT}
       DB_DATABASE: ${DB_DATABASE}
@@ -21,7 +23,7 @@ services:
     networks:
       - app_network
   psql_db:
-    image: postgres:latest
+    image: postgres:18.1-alpine3.23
     restart: unless-stopped
     environment:
       POSTGRES_DB: ${DB_DATABASE}
@@ -35,6 +37,15 @@ services:
       timeout: 5s
       retries: 3
       start_period: 15s
+    networks:
+      - app_network
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: some@example.com
+      PGADMIN_DEFAULT_PASSWORD: password1234
+    ports:
+      - "80:80"
     networks:
       - app_network
 
