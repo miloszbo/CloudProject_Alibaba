@@ -1,23 +1,22 @@
-FROM node:lts-alpine AS build-stage
+FROM node:18-alpine AS build
 
 WORKDIR /app
-
 COPY package*.json ./
-
 RUN npm install
-
 COPY . .
-
 RUN npm run build
 
-FROM node:lts-alpine AS prod
+# Use a minimal Node image to serve files
+FROM node:18-alpine
 
 WORKDIR /app
 
-COPY --from=build-stage /app /app
+# Install serve
+RUN npm install -g serve
 
-RUN npm install
+# Copy build files
+COPY --from=build /app/build ./build
 
 EXPOSE 80
 
-CMD [ "npm", "run", "dev" ]
+CMD ["serve", "-s", "build", "-l", "80"]
