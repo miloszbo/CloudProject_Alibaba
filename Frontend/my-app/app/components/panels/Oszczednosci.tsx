@@ -52,8 +52,8 @@ export function Oszczednosci() {
   }
 
 
-  const expenses = data.expenses.filter((e) => e.periodId === currentPeriod.id);
-  const incomes = data.incomes.filter((i) => i.periodId === currentPeriod.id);
+  const expenses = data.expenses.filter((e) => e.period_id === currentPeriod.id);
+  const incomes = data.incomes.filter((i) => i.period_id === currentPeriod.id);
 
   const totalExpenses = expenses.reduce((s, e) => s + (e.amount || 0), 0);
   const totalIncomes = incomes.reduce((s, i) => s + (i.amount || 0), 0);
