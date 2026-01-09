@@ -6,12 +6,12 @@ type PanelContextType = {
 };
 
 export const PanelContext = React.createContext<PanelContextType>({
-  selected: "default",
+  selected: "wydatki",
   setSelected: () => {},
 });
 
 export function PanelProvider({ children }: { children: React.ReactNode }) {
-  const [selected, setSelected] = React.useState<string>("default");
+  const [selected, setSelected] = React.useState<string>("wydatki");
   return (
     <PanelContext.Provider value={{ selected, setSelected }}>
       {children}

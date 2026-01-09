@@ -12,18 +12,18 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Register() {
   const navigate = useNavigate();
-  
+
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
-  
+
   const handleHome = () => {
     navigate("/home");
   };
-  const handleLogin = () => {    
+  const handleLogin = () => {
     navigate("/");
   };
 
@@ -53,86 +53,73 @@ export default function Register() {
 
   return (
   <div className="flex w-full h-full justify-center items-center login-form">
-      <div className="w-[516px] mx-auto">
+    <div className="w-[516px] mx-auto">
+      <h2 className="text-[40px] font-bold mb-3 text-center">
+        Zarejestruj się
+      </h2>
 
-        <h2 className="text-[40px] font-bold mb-3 text-center">
-          Zarejestruj się
-        </h2>
+          <fieldset
+      className="flex bg-[#7C7C7C] rounded-box w-full h-[344px] mx-auto border p-4 pt-6 text-sm flex-col items-center justify-between"
+    >
+      <div className="flex flex-col gap-4 w-full items-center flex-1 justify-center">
+        <div className="flex flex-col gap-1 w-[340px]">
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="text-[20px] input input-sm w-full h-8"
+            placeholder="Nazwa użytkownika"
+          />
+        </div>
 
-        <fieldset className="flex bg-[#7C7C7C] rounded-box w-full h-[344px] mx-auto border p-4 pt-6 text-sm flex-col gap-4 items-center">
+        <div className="flex flex-col gap-1 w-[340px]">
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="text-[20px] input input-sm w-full h-8"
+            placeholder="Email"
+          />
+        </div>
 
-          <div className="flex flex-col gap-4 w-full items-center">
-
-            {/* Username */}
-            <div className="flex flex-col gap-1 w-[340px] mt-14">
-              <label className="text-white text-[16px]">
-                Nazwa użytkownika
-              </label>
-              <input
-                type="text"
-                value={username}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setUsername(e.target.value)
-                }
-                className="text-[20px] input input-sm w-full h-8"
-              />
-            </div>
-
-            {/* Email */}
-            <div className="flex flex-col gap-1 w-[340px]">
-              <label className="text-white text-[16px]">
-                Email
-              </label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setEmail(e.target.value)
-                }
-                className="text-[20px] input input-sm w-full h-8"
-              />
-            </div>
-
-            {/* Password */}
-            <div className="flex flex-col gap-1 w-[340px]">
-              <label className="text-white text-[16px]">
-                Hasło
-              </label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setPassword(e.target.value)
-                }
-                className="text-[20px] input input-sm w-full h-8"
-              />
-            </div>
-
-          </div>
-
-          {/* Error message */}
-          {error && (
-            <p className="text-red-500 text-sm mt-1">
-              {error}
-            </p>
-          )}
-
-          <button
-            onClick={handleRegister}
-            disabled={loading}
-            className="btn btn-neutral bg-[#059669] border-0 flex-center text-[20px] mt-2 w-[258px] self-center h-12"
-          >
-            {loading ? "Rejestracja..." : "Zarejestruj się"}
-          </button>
-
-          <button
-            onClick={handleLogin}
-            className="btn btn-ghost border-0"
-          >
-            Posiadasz konto?
-          </button>
-
-        </fieldset>
+        <div className="flex flex-col gap-1 w-[340px]">
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="text-[20px] input input-sm w-full h-8"
+            placeholder="Hasło"
+          />
+        </div>
       </div>
-    </div> );
+
+        {error && (
+          <p className="text-red-500 text-sm mb-2">
+            {error}
+          </p>
+        )}
+
+
+      <div className="flex flex-col items-center gap-2">
+        <button
+          onClick={handleRegister}
+          disabled={loading}
+          className="btn btn-neutral bg-[#059669] border-0 flex-center text-[20px] w-[258px] h-12"
+        >
+          {loading ? "Rejestracja..." : "Zarejestruj się"}
+        </button>
+
+        <button
+          onClick={handleLogin}
+          className="btn btn-ghost border-0"
+        >
+          Posiadasz konto?
+        </button>
+      </div>
+    </fieldset>
+
+    </div>
+  </div>
+);
+
 }

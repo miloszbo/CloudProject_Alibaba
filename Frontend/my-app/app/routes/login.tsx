@@ -54,68 +54,69 @@ export default function Login() {
     }
   };
 
-  return (
+ return (
   <div className="flex w-full h-full justify-center items-center login-form">
-  <div className="w-[516px] mx-auto">
+    <div className="w-[516px] mx-auto">
 
-    <h2 className="text-[40px] font-bold mb-3 text-center">Zaloguj się</h2>
+      <h2 className="text-[40px] font-bold mb-3 text-center">
+        Zaloguj się
+      </h2>
 
-    <fieldset className="flex bg-[#7C7C7C] rounded-box w-full h-[344px] mx-auto border p-4 pt-6 text-sm flex-col gap-4 items-center">
+      <fieldset
+        className="flex bg-[#7C7C7C] rounded-box w-full h-[286px] mx-auto border p-4 pt-6 text-sm flex-col items-center justify-between"
+      >
 
-      <div className="flex flex-col gap-4 w-full items-center">
-        
-        <div className="flex flex-col gap-1 w-[340px] mt-14">
-          <label className="text-white text-[16px]">
-            Nazwa użytkownika lub email
-          </label>
-          <input
-            type="text"
-            value={login}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setLogin(e.target.value)
-            }
-            className="text-[20px] input input-sm w-full h-8"
-          /> 
+        <div className="flex flex-col gap-4 w-full items-center flex-1 justify-center">
+          <div className="flex flex-col gap-1 w-[340px]">
+            <input
+              type="text"
+              value={login}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setLogin(e.target.value)
+              }
+              placeholder="Nazwa użytkownika lub email"
+              className="text-[20px] input input-sm w-full h-8"
+            />
+          </div>
+
+          <div className="flex flex-col gap-1 w-[340px]">
+            <input
+              type="password"
+              value={password}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setPassword(e.target.value)
+              }
+              className="text-[20px] input input-sm w-full h-8"
+              placeholder="Hasło"
+            />
+          </div>
         </div>
 
-        <div className="flex flex-col gap-1 w-[340px]">
-          <label className="text-white text-[16px]">
-            Hasło
-          </label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setPassword(e.target.value)
-            }
-            className="text-[20px] input input-sm w-full h-8"
-          />
+        {error && (
+          <p className="text-red-500 text-sm mb-2">
+            {error}
+          </p>
+        )}
+
+        <div className="flex flex-col items-center gap-2">
+          <button
+            onClick={handleLogin}
+            disabled={loading}
+            className="btn btn-neutral bg-[#059669] border-0 flex-center text-[20px] w-[258px] h-12"
+          >
+            {loading ? "Logowanie..." : "Zaloguj się"}
+          </button>
+
+          <button
+            onClick={handleRegister}
+            className="btn btn-ghost border-0"
+          >
+            Nie posiadasz konta?
+          </button>
         </div>
 
-      </div>
-
-      {error && (
-        <p className="text-red-500 text-sm mt-1">
-          {error}
-        </p>
-      )}
-
-      <button
-        onClick={handleLogin}
-        disabled={loading}
-        className="btn btn-neutral bg-[#059669] border-0 flex-center text-[20px] mt-2 w-[258px] self-center h-12"
-      >
-        {loading ? "Logowanie..." : "Zaloguj się"}
-      </button>
-
-      <button
-        onClick={handleRegister}
-        className="btn btn-ghost border-0"
-      >
-        Nie posiadasz konta?
-      </button>   
-
-    </fieldset>
+      </fieldset>
+    </div>
   </div>
-</div> );
+);
 }
