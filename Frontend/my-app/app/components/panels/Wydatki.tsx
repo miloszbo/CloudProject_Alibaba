@@ -649,30 +649,9 @@ function ExpenseDetails({
           </div>
 
           <div className="mt-2 flex items-center justify-between">
-            {/* LEWA STRONA – ikonki obrazek + załącznik */}
+            {/* LEWA STRONA – LEWA STRONA – miejsce na ikonki załącznika i zdjęć */}
             <div className="flex items-center gap-3">
-              <button
-                type="button"
-                className="w-7 h-7 flex items-center justify-center"
-                title="Dodaj zdjęcie"
-              >
-                <img
-                  src="/icons/image.png"
-                  alt="Zdjęcie"
-                  className="w-6 h-6"
-                />
-              </button>
-              <button
-                type="button"
-                className="w-7 h-7 flex items-center justify-center"
-                title="Dodaj załącznik"
-              >
-                <img
-                  src="/icons/attach.png"
-                  alt="Załącznik"
-                  className="w-6 h-6"
-                />
-              </button>
+              
             </div>
 
             {/* PRAWA STRONA – statusy */}
